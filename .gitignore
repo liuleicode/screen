@@ -24,7 +24,7 @@
 *.test
 *.tar
 *group
-*rar
+
 *vali
 *sdf
 Release

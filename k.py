@@ -41,12 +41,12 @@ if __name__ == "__main__":
                         sql = "UPDATE orlprice SET name = '%s',new_price = '%s',rmb_price ='%s',diff_price = '%s',diff_percent = '%s',open_price = '%s',high_price='%s',low_price = '%s',last_price = '%s',hold_count = '%s',buy_price = '%s',sell_price ='%s',price_time = '%s' WHERE id = %d "
                         if(num<=4):
                             param = (
-                                result[13], result[0], "", "", result[1], result[8], result[4], result[5], result[7],
+                                result[13], result[0], "----", "----", result[1], result[8], result[4], result[5], result[7],
                                 result[9],
                                 result[2], result[3], result[6], num)
                         else:
                             param = (
-                                result[9], result[8], "", "", "", result[3], result[6], '', result[5],
+                                result[9], result[8], "----", "----", "----", result[3], result[6], '----', result[5],
                                 result[4],
                                 result[1], result[2], result[0], num)
 

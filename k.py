@@ -20,7 +20,8 @@ if __name__ == "__main__":
 
             while (True):
                 url = "http://hq.sinajs.cn/list="
-                urllist = [[url + "hf_OIL",1], [url + 'hf_CL',2], [url + 'hf_GC',3], [url + 'hf_XAU',4], [url + 'DINIW',5], [url + 'USDCNY',6]]
+                urllist = [[url + "hf_OIL", 1], [url + 'hf_CL', 2], [url + 'hf_GC', 3], [url + 'hf_XAU', 4],
+                           [url + 'DINIW', 5], [url + 'USDCNY', 6]]
                 for url in urllist:
                     try:
                         #    请求
@@ -39,14 +40,35 @@ if __name__ == "__main__":
                         result = data.split('"')[1].split(',')
                         print(result)
                         sql = "UPDATE orlprice SET name = '%s',new_price = '%s',rmb_price ='%s',diff_price = '%s',diff_percent = '%s',open_price = '%s',high_price='%s',low_price = '%s',last_price = '%s',hold_count = '%s',buy_price = '%s',sell_price ='%s',price_time = '%s' WHERE id = %d "
-                        if(num<=4):
+                        new_price_tmp = ""
+                        if (num <= 4):
+                            result0 = float(result[0])
+                            result7 = float(result[7])
+                            if (result0 < result7):
+                                new_price_tmp = result[0] + "↓"
+                            elif result0 == result7:
+                                new_price_tmp = result[0] + "="
+                            else:
+                                new_price_tmp = result[0] + "↑"
+
                             param = (
-                                result[13], result[0], "----", "----", result[1], result[8], result[4], result[5], result[7],
+
+                                result[13], new_price_tmp, "----", "----", result[1], result[8], result[4], result[5],
+                                result[7],
                                 result[9],
                                 result[2], result[3], result[6], num)
                         else:
+                            result5 = float(result[5])
+                            result8 = float(result[8])
+                            if (result8 < result5):
+                                new_price_tmp = result[8] + "↓"
+                            elif result8 == result5:
+                                new_price_tmp = result[8] + "="
+                            else:
+                                new_price_tmp = result[8] + "↑"
+
                             param = (
-                                result[9], result[8], "----", "----", "----", result[3], result[6], '----', result[5],
+                                result[9], new_price_tmp, "----", "----", "----", result[3], result[6], '----', result[5],
                                 result[4],
                                 result[1], result[2], result[0], num)
 

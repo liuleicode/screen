@@ -8,7 +8,7 @@ if __name__=="__main__":
                 host='localhost',
                 port=3306,
                 user='root',
-                passwd='Xabcd1234.LL',
+                passwd='oracle',
                 db='mysql',
                 charset='utf8'
             )
@@ -19,16 +19,17 @@ if __name__=="__main__":
             while True:
                 data = cur.fetchone()
                 if data == None: break
+                param = (data[0],data[4])
                 cur2.execute(
-                    "select id,name,open_price,last_price,today from orlpricedtl where id = %d and today = %s")
+                    "select id,name,open_price,last_price,today from orlpricedtl where id = %d and today = '%s'"%(data[0],data[4]))
                 if None == cur2.fetchone():
-                    cur2.execute("insert into orlpricedtl values(%d,%s,%s,%s,%s)" % data)
+                    cur2.execute("insert into orlpricedtl values(%d,'%s','%s','%s','%s')" % data)
 
             connect.commit()
             cur2.close()
             cur.close()
             connect.close()
-            time.sleep(36000)
+            time.sleep(2)
 
         except Exception as e:
             print (e)

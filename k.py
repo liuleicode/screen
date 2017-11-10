@@ -39,7 +39,7 @@ if __name__ == "__main__":
                         # 打印结果
                         result = data.split('"')[1].split(',')
                         print(result)
-                        sql = "UPDATE orlprice SET name = '%s',new_price = '%s',rmb_price ='%s',diff_price = '%s',diff_percent = '%s',open_price = '%s',high_price='%s',low_price = '%s',last_price = '%s',hold_count = '%s',buy_price = '%s',sell_price ='%s',price_time = '%s' WHERE id = %d "
+                        sql = "UPDATE orlprice SET name = '%s',new_price = '%s',rmb_price ='%s',diff_price = '%s',diff_percent = '%s',open_price = '%s',high_price='%s',low_price = '%s',last_price = '%s',hold_count = '%s',buy_price = '%s',sell_price ='%s',price_time = '%s' ,today='%s' WHERE id = %d "
                         new_price_tmp = ""
                         if (num <= 4):
                             result0 = float(result[0])
@@ -56,7 +56,7 @@ if __name__ == "__main__":
                                 result[13], new_price_tmp, "----", "----", result[1], result[8], result[4], result[5],
                                 result[7],
                                 result[9],
-                                result[2], result[3], result[6], num)
+                                result[2], result[3], result[6],result[12], num)
                         else:
                             result5 = float(result[5])
                             result8 = float(result[8])
@@ -70,7 +70,7 @@ if __name__ == "__main__":
                             param = (
                                 result[9], new_price_tmp, "----", "----", "----", result[3], result[6], '----', result[5],
                                 result[4],
-                                result[1], result[2], result[0], num)
+                                result[1], result[2], result[0],result[10], num)
 
                         cursor.execute(sql % param)
                         connect.commit()
